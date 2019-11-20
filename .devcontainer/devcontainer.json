@@ -2,6 +2,8 @@
 	"name": "HIE",
 	"dockerFile": "Dockerfile",
 
+	"runArgs": ["-u", "vscode"],
+
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},

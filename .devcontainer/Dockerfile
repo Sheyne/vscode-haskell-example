@@ -9,6 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # if yours is not 1000. See https://aka.ms/vscode-remote/containers/non-root-user.
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+ARG USERNAME=vscode
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -17,8 +18,8 @@ RUN apt-get update \
     && apt-get install -y git procps \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
-    && if [ "$USER_GID" != "1000" ]; then groupmod node --gid $USER_GID; fi \
-    && if [ "$USER_UID" != "1000" ]; then usermod --uid $USER_UID node; fi \
+    && groupadd --gid $USER_GID $USERNAME \
+    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
     # [Optional] Add sudo support for non-root users
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
