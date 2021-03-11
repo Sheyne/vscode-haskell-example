@@ -10,7 +10,8 @@ Follow these steps to open this sample in a container:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started).
 
-2. **Linux users:** Update `USER_UID` and `USER_GID` in `.devcontainer/Dockerfile` and `"runArgs": [ "-u": "1000" ]` in `.devcontainer/devcontainer.json` with your user UID/GID if not 1000 to avoid creating files as root.
+2. **Linux users:** Update `USER_UID` and `USER_GID` in `.devcontainer/Dockerfile` and `"runArgs": [ "-u", "1000" ]` in `.devcontainer/devcontainer.json` with your user UID/GID if not 1000 to avoid creating files as root.
+    If you get a permission denied on Fedora or another SELinux enabled Linux Distribution you can, as a workaround, run `chcon -Rt svirt_sandbox_file_t $PWD` inside the `${workspaceFolder}` to fix the error. ([related Issue](https://github.com/microsoft/vscode-remote-release/issues/1333)
 
 3. If you're not yet in a development container:
    - Clone this repository.
